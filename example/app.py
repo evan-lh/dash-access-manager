@@ -37,7 +37,7 @@ app.layout = html.Div(children=[dcc.Location(id='url', refresh=False),
                                 ])
 
 
-def render_default_page(navbar_button=[], page_content=[html.H3("Login successfull")]):
+def render_default_page(navbar_button=[], page_content=[html.H3("Some content")]):
     return [
                dbc.Navbar([
                               dbc.NavbarBrand("Navbar"),
@@ -54,9 +54,9 @@ def render_default_page(navbar_button=[], page_content=[html.H3("Login successfu
               [Input('url', 'pathname')])
 def display_page(pathname):
     if dam.current_user.is_authenticated:
-        return render_default_page(dam.render_logout_button(), dam.render_logged_page())
+        return render_default_page(dam.render_logout_button(), [html.H3('Logged in successfully')])
     else:
-        return render_default_page(dam.render_navbar_login() + dam.render_navbar_sign_up(), dam.render_login_page())
+        return render_default_page(dam.render_navbar_login() + dam.render_navbar_sign_up(), [html.H3('Please log in to continue')])
 
 
 if __name__ == "__main__":

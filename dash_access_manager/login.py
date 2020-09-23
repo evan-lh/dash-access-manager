@@ -78,14 +78,6 @@ def render_navbar_login():
     ]
 
 
-def render_login_page():
-    return [html.H3('Please log in to continue')]
-
-
-def render_logged_page():
-    return [html.H3('Logged in successfully')]
-
-
 def init_login_callbacks(app):
     @app.callback(
         Output("login-modal", "is_open"),
