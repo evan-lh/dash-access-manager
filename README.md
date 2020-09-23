@@ -89,16 +89,21 @@ where you have to replace `username`, `password` and `cluster.url` by your infor
         )
         app.run_server()
     
-You can use this file [app.py](example/app.py) to try it out.
+You can use this file [app.py] to try it out.
 
 ## Contributing
 This project is under development so contributions are welcome to improve the code.
-Have a look at [CONTRIBUTING](docs/CONTRIBUTING.md).
+Have a look at [CONTRIBUTING].
 
 ## Changelog
 
-Take a look at [CHANGELOG](docs/CHANGELOG.md) for more details. 
+Take a look at [CHANGELOG] for more details. 
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for more information. 
+Distributed under the MIT License. See [LICENSE] for more information. 
+
+[app.py]: https://github.com/evan-lh/dash-access-manager/blob/master/example/app.py
+[CONTRIBUTING]: https://github.com/evan-lh/dash-access-manager/blob/master/docs/CONTRIBUTING.md
+[CHANGELOG]: https://github.com/evan-lh/dash-access-manager/blob/master/docs/CHANGELOG.md
+[LICENSE]: https://github.com/evan-lh/dash-access-manager/blob/master/LICENSE

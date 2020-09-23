@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.1] - 2020-09-2020
+
+
+## [0.0.1] - 2020-09-22
 ### Added
 
 - Access manager provides login, logout and sign up buttons based on Flask-Login.
