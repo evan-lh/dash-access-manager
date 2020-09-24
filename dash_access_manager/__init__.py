@@ -1,4 +1,4 @@
-from .login import render_logged_page, render_navbar_login, render_login_page, init_login_callbacks
+from .login import render_navbar_login, init_login_callbacks
 from .logout import render_logout_button, init_logout_callbacks
 from .signup import render_navbar_sign_up, init_signup_callbacks
 from .models import User
