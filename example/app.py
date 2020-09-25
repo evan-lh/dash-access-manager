@@ -10,6 +10,12 @@ import os
 import dash_access_manager as dam
 
 
+server_port = os.environ.get('PORT', 5000)
+
+database_name = os.environ.get('DATABASE_NAME')
+
+database_url = os.environ.get('DATABASE_URL')
+
 #####
 #### Initialize the dash app
 #####
@@ -61,8 +67,8 @@ def display_page(pathname):
 
 if __name__ == "__main__":
     dam.connect(
-        db='DatabaseName',
-        host='DatabaseURL'
+        db=database_name,
+        host=database_url
     )
-    app.run_server()
+    app.run_server(host='0.0.0.0', port=5000)
 
