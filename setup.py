@@ -11,9 +11,8 @@ setuptools.setup(
     description="Dash-Access-Manager provides user access management for Dash.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    install_requires=['bcrypt', 'mongoengine', 'flask_login', 'dnspython'
-                      'dash', 'dash_core_components',
-                      'dash_html_components', 'dash_bootstrap_components'],
+    install_requires=['bcrypt', 'mongoengine', 'flask_login', 'dnspython',
+                      'dash', 'dash_bootstrap_components'],
     url="https://github.com/evan-lh/dash-access-manager",
     packages=setuptools.find_packages(),
     license="MIT",
