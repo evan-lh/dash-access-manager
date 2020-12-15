@@ -7,6 +7,41 @@ from flask_login import login_user
 
 
 def render_navbar_login():
+    """
+    Render a login button that open a form to login
+
+    Returns
+    -------
+    list
+        List of components to display
+    """
+
+    # Define the username input used to login
+    username_login_input = dbc.FormGroup(
+        [
+            dbc.Label("Username", className="mr-2"),
+            dbc.Input(
+                id='login-username',
+                type='text',
+                placeholder='Enter your username'
+            ),
+        ],
+        className="mr-3",
+    )
+
+    # Define the password input used to login
+    password_login_input = dbc.FormGroup(
+        [
+            dbc.Label("Password", className="mr-2"),
+            dbc.Input(
+                id='password-input',
+                type='password',
+                placeholder='Enter your password',
+            ),
+        ],
+        className="mr-3",
+    )
+
     return [
         html.Div(
             [
@@ -18,28 +53,8 @@ def render_navbar_login():
                             dcc.Location(id='login-url', refresh=True),
                             dbc.Form(
                                 [
-                                    dbc.FormGroup(
-                                        [
-                                            dbc.Label("Username", className="mr-2"),
-                                            dbc.Input(
-                                                id='login-username',
-                                                type='text',
-                                                placeholder='Enter your username'
-                                            ),
-                                        ],
-                                        className="mr-3",
-                                    ),
-                                    dbc.FormGroup(
-                                        [
-                                            dbc.Label("Password", className="mr-2"),
-                                            dbc.Input(
-                                                id='password-input',
-                                                type='password',
-                                                placeholder='Enter your password',
-                                            ),
-                                        ],
-                                        className="mr-3",
-                                    ),
+                                    username_login_input,
+                                    password_login_input,
                                     dbc.Alert(
                                         "Sorry, the credentials are wrong...",
                                         id="alert-wrong-credentials",
@@ -77,6 +92,10 @@ def render_navbar_login():
 
 
 def init_login_callbacks(app, User):
+    """
+    Define the callbacks used to perform the login
+    """
+
     @app.callback(
         Output("login-modal", "is_open"),
         [Input("login-open-button", "n_clicks"), Input("login-close-button", "n_clicks")],
@@ -94,14 +113,20 @@ def init_login_callbacks(app, User):
         [State('login-username', 'value'),
          State('password-input', 'value')])
     def perform_login(n_clicks, username, password):
-        if n_clicks > 0:
+        if n_clicks:
 
-            user = User.objects(username=username).first()
+            # If the credentials are not empty
+            if username and password:
 
-            if user:
-                if user.check_password(password.encode('utf-8')):
-                    login_user(user)
-                    return True, False
+                user = User.objects(username=username).first()
+
+                if user:
+                    if user.check_password(password.encode('utf-8')):
+                        login_user(user)
+                        return True, False
+
+                else:
+                    return False, True
 
             else:
                 return False, True
@@ -115,11 +140,11 @@ def init_login_callbacks(app, User):
 
         if is_open:
 
-            # Use the alternative home path to force the page to refresh
-
+            # Return the alternative home path to force the page to refresh
             if pathname == '/':
                 return '/home'
             else:
                 return '/'
+
         else:
             return pathname

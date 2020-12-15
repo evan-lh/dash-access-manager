@@ -2,6 +2,7 @@ from mongoengine import *
 from flask_login import UserMixin
 import bcrypt
 
+
 class User(Document, UserMixin):
     username = StringField(required=True)
     hashed_password = StringField()

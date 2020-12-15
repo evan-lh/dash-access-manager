@@ -54,8 +54,7 @@ To do so, you can generate a secret key with the `os` module by using `os.urando
 After this you will define the layouts and callbacks of your dash app. Here is an simple example that can be used as it is.
     
     app.layout = html.Div(children=[dcc.Location(id='url', refresh=False),
-                                html.Div(id='root'),
-                                html.Div(id='container')
+                                html.Div(id='root')
                                 ])
 
 

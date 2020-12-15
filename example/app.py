@@ -42,9 +42,7 @@ connect(
 ############
 
 app.layout = html.Div(children=[dcc.Location(id='url', refresh=False),
-                                html.Div(id='root'),
-                                html.Div(id='container')
-                                ])
+                                html.Div(id='root')])
 
 
 def render_default_page(navbar_button=[], page_content=[html.H3("Some content")]):
