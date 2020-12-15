@@ -8,12 +8,12 @@ from dash.dependencies import Output, Input
 import os
 
 import dash_access_manager as dam
+from example.models import User
 
+from mongoengine import connect
 
 server_port = os.environ.get('PORT', 5000)
-
 database_name = os.environ.get('DATABASE_NAME')
-
 database_url = os.environ.get('DATABASE_URL')
 
 #####
@@ -24,14 +24,18 @@ external_stylesheets = [dbc.themes.LITERA]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
-
 server.secret_key = os.urandom(12)
+
+app.config.suppress_callback_exceptions = True
 
 # Initiate access manager callbacks
 
-dam.init_access_manager(app)
+access_manager = dam.AccessManager(app, User)
 
-app.config.suppress_callback_exceptions = True
+connect(
+    db=database_name,
+    host=database_url
+)
 
 ############
 ########### Set up the layout
@@ -59,16 +63,12 @@ def render_default_page(navbar_button=[], page_content=[html.H3("Some content")]
 @app.callback(Output('root', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if dam.current_user.is_authenticated:
+    if access_manager.is_authenticated():
         return render_default_page(dam.render_logout_button(), [html.H3('Logged in successfully')])
     else:
         return render_default_page(dam.render_navbar_login() + dam.render_navbar_sign_up(), [html.H3('Please log in to continue')])
 
 
 if __name__ == "__main__":
-    dam.connect(
-        db=database_name,
-        host=database_url
-    )
     app.run_server(host='0.0.0.0', port=5000)
 

@@ -3,8 +3,6 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 
-from dash_access_manager.models import User
-
 from flask_login import login_user
 
 
@@ -78,7 +76,7 @@ def render_navbar_login():
     ]
 
 
-def init_login_callbacks(app):
+def init_login_callbacks(app, User):
     @app.callback(
         Output("login-modal", "is_open"),
         [Input("login-open-button", "n_clicks"), Input("login-close-button", "n_clicks")],

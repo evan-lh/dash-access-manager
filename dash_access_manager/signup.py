@@ -3,11 +3,8 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 
-from dash_access_manager.models import User
-
 from flask_login import login_user
 
-import bcrypt
 
 
 def render_navbar_sign_up():
@@ -99,7 +96,7 @@ def render_navbar_sign_up():
     ]
 
 
-def init_signup_callbacks(app):
+def init_sign_up_callbacks(app, User):
     @app.callback(
         Output("sign-up-modal", "is_open"),
         [Input("sign-up-open-button", "n_clicks"), Input("sign-up-close-button", "n_clicks")],
